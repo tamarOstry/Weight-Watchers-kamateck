@@ -1,5 +1,5 @@
 
-class User {
+class weight {
 
     #startWeight
     #historyOfMeeting
