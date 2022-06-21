@@ -22,6 +22,9 @@ function login(){
             sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
             window.location.href =`../src/html/homeUser.html?user=${JSON.stringify(currentUser)}`;
         }
+        else{
+            alert("you are not allowed to came here you need to application")
+        }
       }
     }
   }
