@@ -2,6 +2,7 @@
     "users":[   
         {
             "id":1,
+            "password":12,
             "firstName":"Miri",
             "lastName":"Levi",
             "address":{
@@ -18,12 +19,13 @@
                     {"Weight":71.5,"date":"2015-12-05"},
                     {"Weight":72.1,"date":"2015-12-05"},
                     {"Weight":71.8,"date":"2015-12-05"},
-                    {"Weight":71.2,"date":"2015-12-05"}
+                    {"Weight":75.7,"date":"2015-12-05"}
                 ]
             }
         },
         {
             "id":2,
+            "password":34,
             "firstName":"Rachel",
             "lastName":"Keler",
             "address":{
@@ -46,6 +48,7 @@
         },
         {
             "id":3,
+            "password":56,
             "firstName":"Shira",
             "lastName":"Avitan",
             "address":{
@@ -66,5 +69,14 @@
                 ]
             }
         }
-    ]
+    ],
+    "manager":{
+        "id":1,
+        "password":123456789,
+        "firstName":"tamar",
+        "lastName":"ostry",
+        "phone":5711282,
+        "email":"tamar@gmail.com",
+        "users":[]
+    }
 }

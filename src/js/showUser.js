@@ -1,26 +1,17 @@
 window.addEventListener('load', (event) => {
-    debugger
     getParams();
 });
 
 function getParams(){
-    debugger
     const params = new URLSearchParams(window.location.search)
     const id=params.get('id');
     getThisUser(id);
 }
 
 function getThisUser(id) {
-  //  const users= JSON.parse(sessionStorage.getItem('manager')).users;
-   const users= JSON.parse(sessionStorage.getItem('users'));
-   console.log(users)
+   const users= JSON.parse(sessionStorage.getItem('manager')).users;
    let thisUser;
-   for (let i=0; i<users.length; i++) {
-     if(users[i].id==id){
-       thisUser = users[i];
-       break;
-     }
-   }
+   thisUser=users.find(user => user.id == id);
    if(thisUser!=null) {
      showUser(thisUser);
    }

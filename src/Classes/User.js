@@ -1,6 +1,7 @@
 
 class User {
     #id
+    #password
     #firstName
     #lastName
     #address
@@ -8,8 +9,9 @@ class User {
     #email
     #height
     #weight
-    constructor(id, firstName, lastName, address, phone, email, height, weight) {
+    constructor(id,password, firstName, lastName, address, phone, email, height, weight) {
         this.#id = id;
+        this.password = password;
         this.#firstName = firstName;
         this.#lastName = lastName;
         this.#address = address;
@@ -21,6 +23,9 @@ class User {
 
     set id(id) { this.#id = id; }
     get id() { return this.#id; }
+
+    set password(password) { this.#password = password; }
+    get password() { return this.#password; }
 
     set firstName(firstName) { this.#firstName = firstName }
     get firstName() { return this.#firstName; }
