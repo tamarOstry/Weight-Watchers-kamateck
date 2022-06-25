@@ -1,27 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script src="../Classes/address.js"></script>
-    <script src="../Classes/manager.js"></script>
-    <script src="../Classes/user.js"></script>
-    <script src="../Classes/weight.js"></script>
-    <script src="../js/homeManager.js"></script>
-    <template id="users-card">
-        <tr class="card" id="">
-            <td class="firstName"></td>
-            <td class="lastName"></td>
-            <td class="bmi" id=""></td>
-        </tr>
-    </template>
+
+<head>
+  <script src="../Classes/address.js"></script>
+  <script src="../Classes/manager.js"></script>
+  <script src="../Classes/user.js"></script>
+  <script src="../Classes/weight.js"></script>
+  <script src="../js/homeManager.js"></script>
+  <template id="users-card">
+    <tr class="card" id="">
+      <td class="firstName"></td>
+      <td class="lastName"></td>
+      <td class="bmi" id=""></td>
+    </tr>
+  </template>
+  <template id="city-card">
+    <option id="city_"></option>
+    </select>
+  </template>
+  <template id="street-card">
+    <option id="street_"></option>
+    </select>
+  </template>
 </head>
+<div id="searches" style="text-align: center;">
+  Searches & Filters 🔎
+  <div class="oneSearch">
+    <span class="span">free Search:</span>
+    <input type="search" id="searchFree" placeholder="Search..." />
+  </div>
+  <div class="oneSearch">
+    <span>by Weight:</span>
+    Higher than:
+    <input type="number" id="searchByHigherWeight" placeholder="Weight..." min="1" />
+    Less than:
+    <input type="number" id="searchByLessWeight" placeholder="Weight..." max="1000" />
+  </div>
+  <div class="oneSearch">
+    <span>by Process trend:</span>
+
+    <select id="searchByProcess">
+      <option>ירידה</option>
+      <option>עליה</option>
+    </select>
+
+    <select id="searchByProcessTime">
+      <option>משבוע שעבר</option>
+      <option>מהתחלה</option>
+    </select>
+
+  </div>
+  <div class="oneSearch">
+    <span>by bmi:</span>
+    Higher than:
+    <input type="number" id="searchByHigherBmi" placeholder="Weight..." min="1" />
+    Less than:
+    <input type="number" id="searchByLessBmi" placeholder="Weight..." max="1000" />
+  </div>
+  <div class="oneSearch">
+    <span>by address:</span>
+    <select id="searchByCity">
+      <option>:בחר עיר</option>
+      <option id="city"></option>
+    </select>
+    <select id="searchByStreet">
+      <option>:בחר רחוב</option>
+      <option id="street"></option>
+    </select>
+  </div>
+  <button id="search" onclick="Searches()">search🔎</button>
+  <button id="nullify" onclick="getUsers()">nullify🎯</button>
+</div>
 <body onload="getUsers()">
-    <h1>hello manager</h1>
-    <table class="users">
-      <tr>
-        <th>first Name</th>
-        <th>last Name</th>
-        <th> <div id="bmi">bmi</div></th>
-      </tr>
-    </table>
+  <h1>hello manager</h1>
+  <table id="users" class="users">
+
+    <tr>
+      <th>first Name</th>
+      <th>last Name</th>
+      <th>
+        <div id="bmi">bmi</div>
+      </th>   
+        <div id="u" >
+     </div> <div id="i" class="i">
+     </div>
+  </div>
+    </tr>
+  </table>
+  <!-- </div> -->
+  <!-- </div> -->
 </body>
+<link href="../css/homeManager.css " rel="stylesheet" />
+
 </html>

@@ -2,3 +2,84 @@
   .bmi{
     color: rgb(244, 237, 30);
   }
+
+  #searches {
+    background-color:rgb(226, 247, 244);
+    border-color: black;
+    border-style: groove;
+    padding: 2px;
+    margin: 2px;
+}
+
+.oneSearch {
+    padding: 6px;
+}
+
+p.description{
+    height:65px;
+}
+.bar::before {
+    content: 'My Store🛒';
+    color: white;
+    /* display: inline-block; */
+    position: absolute;
+    /* margin: 0 auto; */
+    /* display: block; */
+    top: 8px;
+    left: 51%;
+    font-family: Helvetica;
+}
+
+.card button {
+    border: none;
+    outline: 0;
+    padding: 5%;
+    color: white;
+    background-color: #1a6461;
+    text-align: center;
+    /* cursor: pointer; */
+    width: 100%;
+    font-size: 18px;
+}
+
+.card button:hover {
+    opacity: 0.7;
+}
+.bar {
+    background-color: black;
+    height: 35px;
+}
+
+.Filters {
+    position: absolute;
+    width: 184px;
+    float: right;
+    margin: 4px 4px;
+    padding-top: 50px;
+    padding-bottom: 10px;
+    position: absolute;
+    z-index: -1;
+    background-color: rgb(249, 249, 249);
+    font-family: Arial;
+    font-size: 14px;
+    min-height:100%;
+
+}
+
+.cb checkbox{
+    margin-top:50px;
+}
+
+table{
+    text-align: center;
+}
+
+td{
+    padding: 5px;
+    padding-right: 30pt;
+    text-align: center;
+}
+th{
+    padding: 5px;
+    text-align: center;
+}
