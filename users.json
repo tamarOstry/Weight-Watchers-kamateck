@@ -3,35 +3,35 @@
         {
             "id":1,
             "password":12,
-            "firstName":"Miri",
-            "lastName":"Levi",
+            "firstName":"esti",
+            "lastName":"tofik",
             "address":{
                 "city":"jerusalem",
-                "street":"arimon",
+                "street":"geula",
                 "number":5
             },
-            "phone":"0521369874",
-            "email":"ml@gmail.com",
-            "hight":1.70,
+            "phone":"0504139123",
+            "email":"et@gmail.com",
+            "hight":1.60,
             "weight":{
-                "startWeight":73,
+                "startWeight":40.5,
                 "meeting":[
-                    {"Weight":71.5,"date":"2015-12-05"},
-                    {"Weight":72.1,"date":"2015-12-05"},
-                    {"Weight":71.8,"date":"2015-12-05"},
-                    {"Weight":60.7,"date":"2015-12-05"}
+                    {"Weight":40.5,"date":"2015-07-05"},
+                    {"Weight":40.7,"date":"2015-08-05"},
+                    {"Weight":40.0,"date":"2015-09-05"},
+                    {"Weight":41.3,"date":"2015-10-05"}
                 ]
             }
         },
         {
             "id":2,
             "password":34,
-            "firstName":"Rachel",
-            "lastName":"Keler",
+            "firstName":"yehudit",
+            "lastName":"cohen",
             "address":{
-                "city":"jerusalem",
+                "city":"rechovot",
                 "street":"arimon",
-                "number":"5"
+                "number":"110"
             },
             "phone":"0558963214",
             "email":"rk@gmail.com",
@@ -39,33 +39,33 @@
             "weight":{
                 "startWeight":73,
                 "meeting":[
-                    {"Weight":71.5,"date":"2015-12-05"},
-                    {"Weight":72.1,"date":"2015-12-05"},
-                    {"Weight":71.8,"date":"2015-12-05"},
-                    {"Weight":70.2,"date":"2015-12-05"}
+                    {"Weight":70.1,"date":"2015-07-05"},
+                    {"Weight":70.7,"date":"2015-08-05"},
+                    {"Weight":70.0,"date":"2015-09-05"},
+                    {"Weight":69.3,"date":"2015-10-05"}
                 ]
             }
         },
         {
             "id":3,
             "password":56,
-            "firstName":"Shira",
-            "lastName":"Avitan",
+            "firstName":"tova",
+            "lastName":"levi",
             "address":{
                 "city":"jerusalem",
-                "street":"arimon",
-                "number":"5"
+                "street":"bait vagan",
+                "number":"50"
             },
             "phone":"0536985214",
-            "email":"sa@gmail.com",
+            "email":"tl@gmail.com",
             "hight":"1.64",
             "weight":{
                 "startWeight":73,
                 "meeting":[
-                    {"Weight":71.5,"date":"2015-12-05"},
-                    {"Weight":72.1,"date":"2015-12-05"},
-                    {"Weight":71.8,"date":"2015-12-05"},
-                    {"Weight":60.2,"date":"2015-12-05"}
+                    {"Weight":65.5,"date":"2015-07-05"},
+                    {"Weight":65.7,"date":"2015-08-05"},
+                    {"Weight":65.0,"date":"2015-09-05"},
+                    {"Weight":64.3,"date":"2015-10-05"}
                 ]
             }
         }
