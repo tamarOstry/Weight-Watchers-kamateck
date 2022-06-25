@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/newMeeting.js"></script>
+    <script src="../js/homeManager.js"></script>
+    <template id="users-card">
+        <tr class="card" id="">
+            <td class="firstName"></td>
+            <td class="lastName"></td>
+            <td><input type="number" class="weight"></td>
+            <td><input type="date" class="date" ></td>
+            <td><input type="text" class="comments"></td>
+            <td><input type="checkbox" class="notVisit"></td>
+        </tr>
+    </template>
+</head>
+<body onload="getUsers(1)">
+    <h1>hello manager save new meeting</h1>
+    <table class="users">
+      <tr>
+        <th>firstName</th>
+        <th>lastName</th>
+        <th>weight</th>
+        <th>date</th>
+        <th>comments</th>
+        <th>not visit</th>
+      </tr>
+    </table>
+   <button onclick="saveNewMeeting()" class="btn btn-primary">save</button> 
+</body>
+</html>
