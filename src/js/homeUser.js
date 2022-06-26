@@ -6,7 +6,6 @@ function getParams(){
 
 function getUserDetails(){
     const user=getParams();
-    // const user =JSON.parse(sessionStorage.getItem('currentUser'));
     document.querySelector('.name').innerHTML = user.firstName+" "+user.lastName;
     document.querySelector('.address').innerHTML = user.address.city+" "+user.address.street+" "+user.address.number;
     document.querySelector('.phone').innerHTML = user.phone;
