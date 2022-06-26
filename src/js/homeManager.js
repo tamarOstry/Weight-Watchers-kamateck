@@ -1,10 +1,9 @@
 
 getUsers = (n) => {
     const users = JSON.parse(sessionStorage.getItem('manager')).users;
-     usersList1(users,n);
+    usersList1(users,n);
 }
 usersList1 = (list,n) => {
-    debugger
     list.forEach((element) => {
         showUser(element,n);
     });
@@ -87,9 +86,7 @@ searchFree = (users, inputToSearch) => {
     return usersResults;
 }
 searchByWeight = (users, min, max) => {
-    debugger
     const usersResults = users.filter(user => {
-        debugger;
         user.weight.meeting[ user.weight.meeting.length - 1].Weight >= min && user.weight.meeting[user.weight.meeting.length - 1].Weight <= max});
     return usersResults;
 }
