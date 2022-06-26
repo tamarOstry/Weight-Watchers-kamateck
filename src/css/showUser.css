@@ -1,0 +1,23 @@
+button {
+    background-color: #3e8c96; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+table{
+    text-align: center;
+}
+
+td{
+    padding: 5px;
+    padding-right: 30pt;
+    text-align: center;
+}
+th{
+    padding: 5px;
+    text-align: center;
+}
