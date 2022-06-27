@@ -1,10 +1,10 @@
 window.addEventListener('load', (event) => {
     getParams();
 });
-
+let id;
 getParams = () => {
     const params = new URLSearchParams(window.location.search)
-    const id = params.get('id');
+    id = params.get('id');
     getThisUser(id);
 }
 
@@ -34,7 +34,6 @@ showUser = (user) => {
 }
 edit = () => {
     debugger
-
     const collection = document.getElementsByTagName("td");
     for (let i = 0; i < collection.length; i++) {
         collection[i].setAttribute('contenteditable', 'true')
@@ -44,24 +43,24 @@ edit = () => {
 }
 
 save = () => {
+    debugger
     let manager = JSON.parse(sessionStorage.getItem('manager'));
     let users = manager.users;
-    debugger
-    let params = 2;
-    for (let index = 0; index < users.length; index++) {
-        if (params == users[index].id) {
-            users[index].firstName == getElementsByClassName("firstName").innerText
-            users[index].firstName == getElementsByClassName("lastName").innerText
-            users[index].firstName == getElementsByClassName("email").innerText
-            users[index].firstName == getElementsByClassName("phone").innerText
-            users[index].firstName == getElementsByClassName("city").innerText
-            users[index].firstName == getElementsByClassName("street_number").innerText
-            users[index].firstName == getElementsByClassName("hight").innerText
-            users[index].firstName == getElementsByClassName("startWeight").innerText
-            users[index].firstName == getElementsByClassName("weight").innerText
-            users[index].firstName == getElementsByClassName("bmi").innerText
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].id==id) {
+            users[i].firstName = document.querySelector(".firstName").innerHTML;
+            users[i].lastName = document.querySelector(".lastName").innerHTML;
+            users[i].email = document.querySelector(".email").innerHTML;
+            users[i].phone = document.querySelector(".phone").innerHTML;
+            users[i].city = document.querySelector(".city").innerHTML;
+            users[i].street_number = document.querySelector(".street_number").innerHTML;
+            users[i].hight = document.querySelector(".hight").innerHTML;
+            users[i].startWeight = document.querySelector(".startWeight").innerHTML;
+            users[i].weight.meeting[users[i].weight.meeting.length - 1].Weight = document.querySelector(".weight").innerHTML;
+            users[i].bmi = document.querySelector(".bmi").innerHTML;
             manager.users = users;
             sessionStorage.setItem('manager', JSON.stringify(manager));
+            break;
         };
     }
 
