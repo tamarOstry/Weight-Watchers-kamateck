@@ -1,10 +1,10 @@
-function getParams(){
+ getParams=()=>{
     const params = new URLSearchParams(window.location.search)
     const user= JSON.parse(params.get('user'));
     return user;
 }
 
-function getUserDetails(){
+ getUserDetails=()=>{
     const user=getParams();
     document.querySelector('.name').innerHTML = user.firstName+" "+user.lastName;
     document.querySelector('.address').innerHTML = user.address.city+" "+user.address.street+" "+user.address.number;
@@ -16,10 +16,12 @@ function getUserDetails(){
     user.weight.meeting.forEach(m => drowMeet(m));
 }
 
-function drowMeet(meet){
+ drowMeet=(meet)=>{
     const element = document.getElementById("card-weight");
     const cln = element.content.cloneNode(true);
     cln.querySelector(".data").innerText = meet.date;
     cln.querySelector(".weight").innerText = meet.Weight;
     document.querySelector(".weights").appendChild(cln);
+    document.querySelector(".goTodiaryManagement").addEventListener("click", 
+    () => window.location.href =`./diaryManagement.html?id=${getParams().id}`)
 }
