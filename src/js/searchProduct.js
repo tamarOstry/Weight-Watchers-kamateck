@@ -1,4 +1,16 @@
+subscribeToProductSearch=()=>{
+    if(document.querySelector('.input-product').value==""){
+        document.querySelector(".results").remove();
+        const div=document.createElement('div');
+        div.setAttribute("class", "results");
+        document.getElementById('body').appendChild(div);
+    }
+}
 searchProduct=()=>{
+    document.querySelector(".results").remove();
+    const div=document.createElement('div');
+    div.setAttribute("class", "results");
+    document.getElementById('body').appendChild(div);
     const productName=document.querySelector('.input-product').value;
     const options = {
         method: 'GET',

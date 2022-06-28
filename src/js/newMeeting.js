@@ -1,4 +1,4 @@
-function saveNewMeeting(){
+saveNewMeeting=()=>{
 let manager=JSON.parse(sessionStorage.getItem('manager'));
 let users=manager.users;   
 users.forEach(user=> {
