@@ -21,6 +21,9 @@ login=()=>{
         if(currentUser!=null){
             sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
             window.location.href =`../src/html/homeUser.html?user=${JSON.stringify(currentUser)}`;
+            // let url=new URL('../src/html/homeUser.html');
+            // url.searchParams.set('user',JSON.stringify(currentUser));
+            // window.location.href =url;
         }
         else{
             alert("you are not allowed to came here you need to application")
