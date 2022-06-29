@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,11 +9,17 @@
     <script src="../../src/js/searchProduct.js"></script>
     <template class="product-card">
         <div class="name"></div>
+        <!-- <button class="details" onclick="details()">see details🎯</button> -->
     </template>
 </head>
+
 <body id="body">
-    <input type="text" placeholder="Search" class="input-product"/>
-    <button type="button" class="btn btn-primary" onclick="searchProduct();">search</button>
-    <h1 class="results"></h1>
+    <input type="text" placeholder="Search" class="input-product" />
+    <button type="button" class="btn btn-primary" onclick="searchProduct();">search🔎</button><br />
+    <button type="button" class="btn btn-primary" onclick="clearProduct();">clearProduct👻</button>
+    <h1>Click on product to see the details↪</h1>
+    <div class="product-containers">
+        <h1 class="results"></h1>
+    </div>
 </body>
 </html>

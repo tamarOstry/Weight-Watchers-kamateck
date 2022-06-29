@@ -31,3 +31,12 @@ showDetails=(element)=>{
     document.querySelector(".results").innerText=element.protein;
 
 }
+
+clearProduct=()=>{
+    const list =document.querySelector(".product-containers");
+    const productContainers =document.querySelector(".results");
+    productContainers.remove();
+    let usersDiv = document.createElement("h1");
+    usersDiv.setAttribute("class", "results");
+    list.appendChild(usersDiv);
+}
