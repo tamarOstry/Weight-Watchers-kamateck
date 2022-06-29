@@ -5,14 +5,18 @@ getParams=()=>{
 }
 
 getAllDiary=()=>{
-   getParams();
-   fetch(`../../users.json`)
-    .then(response => response.json())
-    .then(response => {
-            console.log(response.users);
-            const currentUser=response.users.find(u=>u.id==idOfUser)
-            currentUser.eatingDiary.forEach(d => showDayEating(d));   
-        })
+    getParams();
+    fetch(`http://localhost:3000/users/${idOfUser}`)
+    .then((response) => {
+          if (response.status === 200 && response.status !== undefined)
+               return response.json();
+          else 
+              alert(response.message)
+    })
+    .then((response) => {
+      console.log(response.users);
+      response.eatingDiary.forEach(d => showDayEating(d));
+    })
     .catch(err => console.error(err)); 
 }
 
@@ -28,7 +32,7 @@ showDayEating=(oneDay)=>{
     document.querySelector(".container").appendChild(cln);
 }
 let modal;
-addMeal=()=>{
+addDate=()=>{
 document.querySelector(".dateOfMeal").value = new Date().toISOString().split('T')[0];
 modal = document.getElementById("myModal");
 let btn = document.getElementById("myBtn");
@@ -44,22 +48,41 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+for (let i=0; i<3; i++)
+    drowMeal()
+
+}
+let numMeal=1;
+drowMeal=()=>{
+  let numToCreateInput=numMeal;
+  const element = document.querySelector(".add-date-card");
+  const cln = element.content.cloneNode(true);
+  cln.querySelector(".meal-title").innerText = `meal-${numMeal}`;
+  cln.querySelector(".container-foods").id=`container-foods-${numMeal}`;
+  cln.querySelector(".addMoreFood").addEventListener("click",()=>createInput(numToCreateInput));
+  numMeal++;
+  document.querySelector(".modal-content").appendChild(cln);
 }
 
-createInput=()=>{
+createInput=(numToCreateInput)=>{
+    let numInput=6;
     let input=document.createElement('input');
     input.type="text";
-    input.className="input-food";
+    input.id=numInput++;
     input.placeholder="Enter food";
     input.autocomplete="off";
-    document.querySelector(".container-inputs").appendChild(input); 
+    document.getElementById(`container-foods-${numToCreateInput}`).appendChild(input); 
 }
 
-saveNewMeal=()=>{
-    //save the new meal 
+
+
+saveNewDate=()=>{
+  
+    const collection = document.querySelector(".container-foods");
+    for (let i = 0; i < collection.length; i++) {
+        collection[i].setAttribute('contenteditable', 'true')
+    }
+
     modal.style.display = "none";
-}
-
-DaySummary=()=>{
-
 }
