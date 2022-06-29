@@ -1,4 +1,5 @@
 let idOfUser;
+let currentUser;
 getParams=()=>{
     const params = new URLSearchParams(window.location.search)
     idOfUser= JSON.parse(params.get('id'));
@@ -14,7 +15,7 @@ getAllDiary=()=>{
               alert(response.message)
     })
     .then((response) => {
-      console.log(response.users);
+      currentUser=response;
       response.eatingDiary.forEach(d => showDayEating(d));
     })
     .catch(err => console.error(err)); 
@@ -75,14 +76,71 @@ createInput=(numToCreateInput)=>{
     document.getElementById(`container-foods-${numToCreateInput}`).appendChild(input); 
 }
 
-
-
 saveNewDate=()=>{
-  
-    const collection = document.querySelector(".container-foods");
-    for (let i = 0; i < collection.length; i++) {
-        collection[i].setAttribute('contenteditable', 'true')
-    }
-
-    modal.style.display = "none";
+  const eatingDiary=getAllTheMealsInThisDay();
+  if(eatingDiary){
+    currentUser.eatingDiary.push(eatingDiary);
+    fetch(`http://localhost:3000/users/${idOfUser}`, {
+        method: `PATCH`,
+        body: JSON.stringify({
+          "eatingDiary": currentUser.eatingDiary,
+        }),
+        headers: { 'Content-type': `application/json; charset=UTF-8` },
+    })
+    .then((response) => {
+        if (response.status === 200 && response.status !== undefined) {
+          alert(`the daily eating saved successfully`);
+          modal.style.display = "none";
+        }
+        else {
+          alert(response.message)
+        }
+    })
+  }
+  modal.style.display = "none";
 }
+
+getAllTheMealsInThisDay=()=>{
+  const dateOfDay=document.querySelector(".dateOfMeal").value;
+  if(!checkIfThisDayIsAlreadyExist(dateOfDay)){
+    let meals=[];
+    for (let j = 1; j < numMeal; j++) {
+        let oneMeal=getOneMealInThisDay(j);
+        if(oneMeal!==null)
+          meals.push(oneMeal); 
+    }
+    if(meals.length>0){
+      let eatingDiary={"date":dateOfDay,"meals":meals}
+      return eatingDiary;
+    }
+    else{
+      alert("you don`t add any meal Because of this we don`t save anything");
+      return null;
+    }
+  }
+  else
+    alert("There is such a day in your calendar, if you would like to add or edit information contact there from the main page");
+}
+
+getOneMealInThisDay=(numOfMeal)=>{
+  let foods=[];
+  const collection = document.getElementById(`container-foods-${numOfMeal}`);
+  const childrens=collection.children;
+  for (let i = 0; i < childrens.length; i++) {
+    if(childrens[i].value!=="")
+      foods.push(childrens[i].value); 
+  }
+  if(foods.length>0) {
+    let oneMeal={"Foods":foods};
+    return oneMeal;
+  }
+  return null;
+}
+
+checkIfThisDayIsAlreadyExist=(dateOfDay)=>{
+  const ifExist=currentUser.eatingDiary.find(e=>e.date===dateOfDay)
+  if(!ifExist) 
+    return false;
+  return true;
+}
+
