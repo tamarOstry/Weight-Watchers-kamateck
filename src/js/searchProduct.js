@@ -104,6 +104,8 @@ choosedFood=(food)=>{
 }
 
 showResultsInTheTable=(theCurrentFood)=>{
+    if(document.querySelector('.item'))
+       document.querySelector('.nutritionalValuesTable').children[1].remove();
     let res=document.getElementById('result');
     res.innerHTML = '';
     document.querySelector('.nutritionalValuesTable').style.display="block";
