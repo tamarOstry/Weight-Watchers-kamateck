@@ -67,8 +67,8 @@ drowMeal=()=>{
 }
 
 createInput=(numToCreateInput)=>{
-    let numInput=6;
-    let input=document.createElement('input');
+  let numInput=6;
+  let input=document.createElement('input');
     input.type="text";
     input.id=numInput++;
     input.placeholder="Enter food";
@@ -142,5 +142,9 @@ checkIfThisDayIsAlreadyExist=(dateOfDay)=>{
   if(!ifExist) 
     return false;
   return true;
+}
+
+editDay=()=>{
+
 }
 
