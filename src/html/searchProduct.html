@@ -1,18 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>searchProduct</title>
     <script src="../../src/js/searchProduct.js"></script>
-    <template class="product-card">
-        <div class="name"></div>
-    </template>
+    <link href="../css/searchProduct.css" rel="stylesheet" />
 </head>
+
 <body id="body">
-    <input type="text" placeholder="Search" class="input-product"/>
-    <button type="button" class="btn btn-primary" onclick="searchProduct();">search</button>
-    <h1 class="results"></h1>
+    <h1>search product and get the nutritional values</h1>
+    <form id="searchProductForm" autocomplete="off">
+        <input dir="rtl" type="text" name="q" id="q" onKeyUp="showResults(this.value)" placeholder="Enter food name"/>
+       <div id="result"></div>
+    </form>
+    <table id="table" class="nutritionalValuesTable" style="display: none;">
+        <tr>
+            <th>אנרגיה</th>
+            <th>סידן</th>
+            <th>פחמימות </th>
+            <th>כולסטרול </th>
+            <th>חומצה פולית</th>
+            <th>ברזל</th>
+            <th>אלכוהול</th>
+            <th>מגנזיום</th>
+            <th>שומן רב_בלתי רווי</th>
+            <th>אשלגן</th>
+            <th>חלבון</th>
+            <th>שומן רווי</th>
+            <th>נתרן</th>
+            <th>סך סיבים תזונתיים</th>
+            <th>סך סוכרים</th>
+            <th>C ויטמין </th>
+            <th>D ויטמין </th>
+            <th>אבץ </th>
+        </tr>
+    </table>
 </body>
 </html>
