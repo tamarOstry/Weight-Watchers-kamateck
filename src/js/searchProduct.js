@@ -1,5 +1,3 @@
-
-
 let foodNames = [];
 
 const options = {
@@ -35,13 +33,16 @@ autocompleteMatch = (input) => {
   });
 }
 
+
 function showResults(val) {
-  res = document.getElementById("result");
-  res.innerHTML = '';
-  let list = '';
-  let foods = autocompleteMatch(val);
-  for (i = 0; i < foods.length; i++) {
-    list += `<li onclick="choosedFood('${foods[i]}')"> ${foods[i]} </li>`;
+    res = document.getElementById("result");
+    res.innerHTML = '';
+    let list = '';
+    let foods = autocompleteMatch(val);
+    for (i=0; i<foods.length; i++) {
+      list += `<li onclick="choosedFood('${foods[i]}')"> ${foods[i]} </li>`;       
+    }
+    res.innerHTML = '<ul>' + list + '</ul>';
   }
   res.innerHTML = '<ul>' + list + '</ul>';
 }
@@ -71,22 +72,30 @@ function showResults(val) {
 //      });
 //   }
 
-choosedFood = (food) => {
-  document.getElementById('q').value = food;
-  fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=c3cb0630-0650-46c1-a068-82d575c094b2&q=${food}&limit=4630`, options)
-    .then(response => response.json())
-    .then(response => {
-      if (response) {
-        if (response.result.records.length > 0)
-          showResultsInTheTable(response.result.records[0]);
-        else alert("No product found");
-      }
-      else throw new Error();
-
-    })
-    .catch(function (err) {
-      console.log('Something went wrong.', err);
+choosedFood=(food,inputClass)=>{
+  if(inputClass){
+    document.getElementsByClassName(`${inputClass}`)[0].value=food;
+    let res=document.getElementsByClassName(`${inputClass}`)[1];
+    res.innerHTML = '';
+  }
+  else{
+     document.querySelector('.q').value=food;
+    fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=c3cb0630-0650-46c1-a068-82d575c094b2&q=${food}&limit=4630`, options)
+     .then(response => response.json())
+     .then(response => {
+        if (response){
+           if(response.result.records.length>0)
+             showResultsInTheTable(response.result.records[0]);
+            else alert("No product found");
+        }
+        else throw new Error();
+      
+     })
+     .catch(function (err) {
+        console.log('Something went wrong.', err);
     });
+  }
+
 }
 
 drowProduct = (element) => {

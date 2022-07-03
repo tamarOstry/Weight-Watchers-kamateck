@@ -50,13 +50,33 @@ addDate = () => {
     }
   }
 
-  for (let i = 0; i < 3; i++)
-    drowMeal()
-
+for (let i=0; i<3; i++)
+    drowMeal();
+// const inp1 = document.querySelector('.input-food-1-1');
+// const inp2 = document.querySelector('.input-food-1-2');
+// if(inp1 && inp2){
+//   inp1.addEventListener('onchange', () => setTimeout(()=>onkeydown,3000) , false);
+//   inp2.addEventListener('onchange', () => setTimeout(()=>onkeydown,3000), false);
+// }
 }
-let numMeal = 1;
-drowMeal = () => {
-  let numToCreateInput = numMeal;
+
+onkeydown=()=>{
+  const activeInput = document.activeElement;
+  const classInput =activeInput.attributes.class.value;
+  res = document.getElementsByClassName(classInput)[1];
+  const valueInput = activeInput.value;
+  res.innerHTML = '';
+  let list = '';
+  let foods = autocompleteMatch(valueInput);
+  for (i=0; i<foods.length; i++) {
+    list += `<li onclick="choosedFood('${foods[i]}','${classInput}')"> ${foods[i]} </li>`;       
+  }
+  res.innerHTML = '<ul>' + list + '</ul>';
+}
+
+let numMeal=1;
+drowMeal=()=>{
+  let numToCreateInput=numMeal;
   const element = document.querySelector(".add-date-card");
   const cln = element.content.cloneNode(true);
   cln.querySelector(".meal-title").innerText = `meal-${numMeal}`;
@@ -66,14 +86,14 @@ drowMeal = () => {
   document.querySelector(".modal-content").appendChild(cln);
 }
 
-createInput = (numToCreateInput) => {
-  let numInput = 6;
-  let input = document.createElement('input');
-  input.type = "text";
-  input.id = numInput++;
-  input.placeholder = "Enter food";
-  input.autocomplete = "off";
-  document.getElementById(`container-foods-${numToCreateInput}`).appendChild(input);
+createInput=(numToCreateInput)=>{
+  let numInput=6;
+  let input=document.createElement('input');
+    input.type="text";
+    input.id=numInput++;
+    input.placeholder="Enter food";
+    input.autocomplete="off";
+    document.getElementById(`container-foods-${numToCreateInput}`).appendChild(input); 
 }
 
 saveNewDate = () => {
@@ -127,8 +147,9 @@ getOneMealInThisDay = (numOfMeal) => {
   const collection = document.getElementById(`container-foods-${numOfMeal}`);
   const childrens = collection.children;
   for (let i = 0; i < childrens.length; i++) {
-    if (childrens[i].value !== "")
-      foods.push(childrens[i].value);
+    debugger
+    if(childrens[i].children[0].value!=="")
+      foods.push(childrens[i].children[0].value); 
   }
   if (foods.length > 0) {
     let oneMeal = { "Foods": foods };
@@ -143,3 +164,8 @@ checkIfThisDayIsAlreadyExist = (dateOfDay) => {
     return false;
   return true;
 }
+
+editDay=()=>{
+
+}
+
