@@ -1,31 +1,31 @@
 
 getUsers = (n) => {
     const users = JSON.parse(sessionStorage.getItem('manager')).users;
-    usersList1(users,n);
+    usersList1(users, n);
 }
-usersList1 = (list,n) => {
+usersList1 = (list, n) => {
     list.forEach((element) => {
-        showUser(element,n);
+        showUser(element, n);
     });
 }
 
-showUser = (user,n) => {
+showUser = (user, n) => {
     const element = document.getElementById("users-card");
     const cln = element.content.cloneNode(true);
     cln.querySelector(".firstName").innerText = user.firstName;
     cln.querySelector(".lastName").innerText = user.lastName;
-    if(!n){
-        cln.querySelector(".card").addEventListener("click", () => window.location.href=`showUser.html?id=${user.id}`);
+    if (!n) {
+        cln.querySelector(".card").addEventListener("click", () => window.location.href = `showUser.html?id=${user.id}`);
         const bmi = user.weight.meeting[user.weight.meeting.length - 1].Weight / (Math.pow(user.hight, 2));
         const bmiColor = bmi - user.weight.meeting[user.weight.meeting.length - 2].Weight / (Math.pow(user.hight, 2));
         cln.querySelector(".bmi").innerText = bmi;
-        cln.querySelector(".bmi").id=user.id;
+        cln.querySelector(".bmi").id = user.id;
         document.querySelector(".i").appendChild(cln);
-        changeColor(bmiColor,user.id);
+        changeColor(bmiColor, user.id);
     }
-    else{
-        cln.querySelector('.card').id=user.id;
-        cln.querySelector(".weight").value = user.weight.meeting[user.weight.meeting.length-1].Weight;
+    else {
+        cln.querySelector('.card').id = user.id;
+        cln.querySelector(".weight").value = user.weight.meeting[user.weight.meeting.length - 1].Weight;
         cln.querySelector(".date").value = new Date().toISOString().split('T')[0];
         document.querySelector(".users").appendChild(cln);
     }
@@ -62,7 +62,7 @@ Searches = () => {
 
     inputToSearch_1 = document.getElementById('searchByHigherBmi');
     inputToSearch_2 = document.getElementById('searchByLessBmi');
-    if (inputToSearch_1.value != '' && inputToSearch_2.value != '') {
+    if (inputToSearch_1.value !== '' && inputToSearch_2.value !== '') {
         users = searchByBmi(users, inputToSearch_1, inputToSearch_2);
     }
 
@@ -87,16 +87,17 @@ searchFree = (users, inputToSearch) => {
 }
 searchByWeight = (users, min, max) => {
     const usersResults = users.filter(user => {
-        user.weight.meeting[ user.weight.meeting.length - 1].Weight >= min && user.weight.meeting[user.weight.meeting.length - 1].Weight <= max});
+        user.weight.meeting[user.weight.meeting.length - 1].Weight >= min && user.weight.meeting[user.weight.meeting.length - 1].Weight <= max
+    });
     return usersResults;
 }
 
 searchByProcess = (users, trend, time) => {
     const usersResults = users.filter(
-        user => trend == "ירידה" && time == "בשבוע שעבר" && document.getElementById(user.id).style.backgroundColor == "lightgreen"
-            || trend == "ירידה" && time == "בהתחלה" && user.weight.startWeight > user.weight.meeting[length - 1]
-            || trend == "עליה" && time == "בשבוע שעבר" && document.getElementById(user.id).style.backgroundColor == "red"
-            || trend == "עליה" && time == "בהתחלה" && user.weight.startWeight < user.weight.meeting[length - 1]
+        user => trend === "ירידה" && time === "בשבוע שעבר" && document.getElementById(user.id).style.backgroundColor === "lightgreen"
+            || trend === "ירידה" && time === "בהתחלה" && user.weight.startWeight > user.weight.meeting[length - 1]
+            || trend === "עליה" && time === "בשבוע שעבר" && document.getElementById(user.id).style.backgroundColor === "red"
+            || trend === "עליה" && time === "בהתחלה" && user.weight.startWeight < user.weight.meeting[length - 1]
     );
     return usersResults;
 }
@@ -113,7 +114,7 @@ searchByBmi = (users, min, max) => {
 // }
 drawAfterChanges = (u) => {
     debugger
-    let usersList =document.getElementById("i");
+    let usersList = document.getElementById("i");
     let list = document.getElementById("users");
     usersList.remove();
     let usersDiv = document.createElement("div");
@@ -121,8 +122,3 @@ drawAfterChanges = (u) => {
     list.appendChild(usersDiv);
     usersList1(u);
 }
-
-
-
-
-
