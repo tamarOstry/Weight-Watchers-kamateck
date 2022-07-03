@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>diary management</title>
     <script src="../js/diaryManagement.js"></script>
+    <script src="../js/searchProduct.js"></script>
     <template class="dayEating-card">
         <tr class="one-day">
             <td class="date"></td>
@@ -24,11 +25,19 @@
         <div class="meal-container">
             <h2 class="meal-title"></h2>
             <div class="container-foods" id="">
-                <input type="text" id="1" placeholder="Enter food" autocomplete="off">
+                <form id="searchProductForm" autocomplete="off">
+                    <input dir="rtl" type="text" name="q" id="q" class="input-food-1-1" onKeyUp="onkeydown()" placeholder="Enter food name"/>
+                    <div id="result" class="input-food-1-1"></div>
+                </form>
+                <form id="searchProductForm" autocomplete="off">
+                    <input dir="rtl" type="text" name="q" id="q" class="input-food-1-2" onKeyUp="onkeydown()" placeholder="Enter food name"/>
+                    <div id="result" class="input-food-1-2"></div>
+                </form>
+                <!-- <input type="text" id="1" placeholder="Enter food" autocomplete="off">
                 <input type="text" id="2" placeholder="Enter food" autocomplete="off">
                 <input type="text" id="3" placeholder="Enter food" autocomplete="off">
                 <input type="text" id="4" placeholder="Enter food" autocomplete="off">
-                <input type="text" id="5" placeholder="Enter food" autocomplete="off">
+                <input type="text" id="5" placeholder="Enter food" autocomplete="off"> -->
             </div>
             <button class="addMoreFood">Add more food</button>
         </div>
@@ -62,4 +71,5 @@
 </div>
 </body>
 <link href="../css/diaryManagement.css" rel="stylesheet" />
+<link href="../css/searchProduct.css" rel="stylesheet" />
 </html>

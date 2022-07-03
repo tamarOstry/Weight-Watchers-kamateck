@@ -1,21 +1,3 @@
-// subscribeToProductSearch=()=>{
-//     if(document.querySelector('.input-product').value==""){
-//         document.querySelector(".results").remove();
-//         const div=document.createElement('div');
-//         div.setAttribute("class", "results");
-//         document.getElementById('body').appendChild(div);
-//     }
-// }
-
-// showDetails=(element)=>{
-//     document.querySelector(".results").remove();
-//     const div=document.createElement('div');
-//     div.setAttribute("class", "results");
-//     document.getElementById('body').appendChild(div);
-//     document.querySelector(".results").innerText=element.protein;
-
-// }
-
 let foodNames = [];
 const options = {
   method: 'GET',
@@ -48,6 +30,7 @@ autocompleteMatch=(input)=> {
       }
     });
   }
+
 
 function showResults(val) {
     res = document.getElementById("result");
@@ -85,8 +68,14 @@ function showResults(val) {
 //      });
 //   }
 
-choosedFood=(food)=>{
- document.querySelector('.q').value=food;
+choosedFood=(food,inputClass)=>{
+  if(inputClass){
+    document.getElementsByClassName(`${inputClass}`)[0].value=food;
+    let res=document.getElementsByClassName(`${inputClass}`)[1];
+    res.innerHTML = '';
+  }
+  else{
+     document.querySelector('.q').value=food;
     fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=c3cb0630-0650-46c1-a068-82d575c094b2&q=${food}&limit=4630`, options)
      .then(response => response.json())
      .then(response => {
@@ -101,6 +90,8 @@ choosedFood=(food)=>{
      .catch(function (err) {
         console.log('Something went wrong.', err);
     });
+  }
+
 }
 
 showResultsInTheTable=(theCurrentFood)=>{
