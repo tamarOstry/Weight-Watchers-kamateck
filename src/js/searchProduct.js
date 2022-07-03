@@ -44,8 +44,7 @@ function showResults(val) {
     }
     res.innerHTML = '<ul>' + list + '</ul>';
   }
-  res.innerHTML = '<ul>' + list + '</ul>';
-}
+
 
 //Works only with a complete word within the entire product description and not a single letter
 //   showResults=(val)=> {
