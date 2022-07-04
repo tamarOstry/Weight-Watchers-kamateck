@@ -1,42 +1,42 @@
 
-getUsers = (n) => {
+getUsers = (fromNewMeeting) => {
     const users = JSON.parse(sessionStorage.getItem('manager')).users;
-    usersList1(users, n);
+    usersList1(users, fromNewMeeting);
 }
-usersList1 = (list, n) => {
+usersList1 = (list, fromNewMeeting) => {
     list.forEach((element) => {
-        showUser(element, n);
+        showUser(element, fromNewMeeting);
     });
 }
 
-showUser = (user, n) => {
-    const element = document.getElementById("users-card");
+showUser = (user, fromNewMeeting) => {
+    const element = document.getElementById('users-card');
     const cln = element.content.cloneNode(true);
-    cln.querySelector(".firstName").innerText = user.firstName;
-    cln.querySelector(".lastName").innerText = user.lastName;
-    if(!n){
-        cln.querySelector(".card").addEventListener("click", () => window.location.href=`showUser.html?id=${user.id}`);
+    cln.querySelector('.firstName').innerText = user.firstName;
+    cln.querySelector('.lastName').innerText = user.lastName;
+    if(!fromNewMeeting){
+        cln.querySelector('.card').addEventListener("click", () => window.location.href=`showUser.html?id=${user.id}`);
         const bmi = user.weight.meeting[user.weight.meeting.length - 1].Weight / (user.hight ** 2);
         const bmiColor = bmi - user.weight.meeting[user.weight.meeting.length - 2].Weight / (user.hight ** 2);
-        cln.querySelector(".bmi").innerText = bmi;
-        cln.querySelector(".bmi").id = user.id;
-        document.querySelector(".i").appendChild(cln);
+        cln.querySelector('.bmi').innerText = bmi;
+        cln.querySelector('.bmi').id = user.id;
+        document.querySelector('.i').appendChild(cln);
         changeColor(bmiColor, user.id);
     }
     else {
         cln.querySelector('.card').id = user.id;
-        cln.querySelector(".weight").value = user.weight.meeting[user.weight.meeting.length - 1].Weight;
-        cln.querySelector(".date").value = new Date().toISOString().split('T')[0];
-        document.querySelector(".users").appendChild(cln);
+        cln.querySelector('.weight').value = user.weight.meeting[user.weight.meeting.length - 1].Weight;
+        cln.querySelector('.date').value = new Date().toISOString().split('T')[0];
+        document.querySelector('.users').appendChild(cln);
     }
 }
 
 changeColor = (bmiColor, id) => {
     if (bmiColor < 0) {
-        document.getElementById(id).style.backgroundColor = "lightgreen";
+        document.getElementById(id).style.backgroundColor = 'lightgreen';
     }
     else {
-        document.getElementById(id).style.backgroundColor = "red";
+        document.getElementById(id).style.backgroundColor = 'red';
     };
 }
 
@@ -74,7 +74,6 @@ Searches = () => {
     drawAfterChanges(users);
 }
 searchFree = (users, inputToSearch) => {
-    debugger
     const usersResults = users.filter(user => user.id === inputToSearch ||
         user.firstName === inputToSearch ||
         user.lastName === inputToSearch ||
@@ -94,10 +93,10 @@ searchByWeight = (users, min, max) => {
 
 searchByProcess = (users, trend, time) => {
     const usersResults = users.filter(
-        user => trend === "ירידה" && time === "בשבוע שעבר" && document.getElementById(user.id).style.backgroundColor === "lightgreen"
-            || trend === "ירידה" && time === "בהתחלה" && user.weight.startWeight > user.weight.meeting[length - 1]
-            || trend === "עליה" && time === "בשבוע שעבר" && document.getElementById(user.id).style.backgroundColor === "red"
-            || trend === "עליה" && time === "בהתחלה" && user.weight.startWeight < user.weight.meeting[length - 1]
+        user => trend === 'ירידה' && time === 'בשבוע שעבר' && document.getElementById(user.id).style.backgroundColor === 'lightgreen'
+            || trend === 'ירידה' && time === 'בהתחלה' && user.weight.startWeight > user.weight.meeting[length - 1]
+            || trend === 'עליה' && time === 'בשבוע שעבר' && document.getElementById(user.id).style.backgroundColor === 'red'
+            || trend === 'עליה' && time === 'בהתחלה' && user.weight.startWeight < user.weight.meeting[length - 1]
     );
     return usersResults;
 }
@@ -113,12 +112,11 @@ searchByBmi = (users, min, max) => {
 
 // }
 drawAfterChanges = (u) => {
-    debugger
-    let usersList = document.getElementById("i");
-    let list = document.getElementById("users");
+    let usersList = document.getElementById('i');
+    let list = document.getElementById('users');
     usersList.remove();
-    let usersDiv = document.createElement("div");
-    usersDiv.setAttribute("class", "i");
+    let usersDiv = document.createElement('div');
+    usersDiv.setAttribute('class', 'i');
     list.appendChild(usersDiv);
     usersList1(u);
 }

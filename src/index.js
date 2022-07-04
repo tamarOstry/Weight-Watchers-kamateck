@@ -1,5 +1,4 @@
 login = () => {
-  debugger
   const email = document.querySelector('.email').value;
   const password = document.querySelector('.password').value;
   const xhr = new XMLHttpRequest();
@@ -18,7 +17,7 @@ login = () => {
         window.location.href = `../src/html/homeManager.html`;
       }
       else {
-        const currentUser = users.find(user => user.email === email && user.password === password);
+        const currentUser = users.find(user => user.email == email && user.password == password);
         if (currentUser != null) {
           sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
           window.location.href = `../src/html/homeUser.html?user=${JSON.stringify(currentUser)}`;
@@ -27,7 +26,7 @@ login = () => {
           // window.location.href =url;
         }
         else {
-          alert("you are not allowed to came here you need to application")
+          alert('you are not allowed to came here you need to application')
         }
       }
     }

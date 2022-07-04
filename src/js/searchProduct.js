@@ -35,20 +35,20 @@ autocompleteMatch = (input) => {
 
 
 function showResults(val) {
-    res = document.getElementById("result");
+    res = document.getElementById('result');
     res.innerHTML = '';
     let list = '';
     let foods = autocompleteMatch(val);
-    for (i=0; i<foods.length; i++) {
-      list += `<li onclick="choosedFood('${foods[i]}')"> ${foods[i]} </li>`;       
-    }
+    foods.forEach(food => {
+      list += `<li onclick="choosedFood('${food}')"> ${food} </li>`;
+    })
     res.innerHTML = '<ul>' + list + '</ul>';
   }
 
 
 //Works only with a complete word within the entire product description and not a single letter
 //   showResults=(val)=> {
-//     res = document.getElementById("result");
+//     res = document.getElementById('result');
 //     res.innerHTML = '';
 //     if (val == '') {
 //       return;
@@ -78,14 +78,14 @@ choosedFood=(food,inputClass)=>{
     res.innerHTML = '';
   }
   else{
-     document.querySelector('.q').value=food;
+     document.getElementById('q').value=food;
     fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=c3cb0630-0650-46c1-a068-82d575c094b2&q=${food}&limit=4630`, options)
      .then(response => response.json())
      .then(response => {
         if (response){
            if(response.result.records.length>0)
              showResultsInTheTable(response.result.records[0]);
-            else alert("No product found");
+            else alert('No product found');
         }
         else throw new Error();
       
@@ -98,39 +98,31 @@ choosedFood=(food,inputClass)=>{
 }
 
 drowProduct = (element) => {
-  const elmnt = document.querySelector(".product-card");
+  const elmnt = document.querySelector('.product-card');
   const cln = elmnt.content.cloneNode(true);
-  cln.querySelector(".name").innerText = element.shmmitzrach;
-  cln.querySelector(".name").addEventListener("click", () => showDetails(element))
-  document.querySelector(".results").appendChild(cln);
+  cln.querySelector('.name').innerText = element.shmmitzrach;
+  cln.querySelector('.name').addEventListener("click", () => showDetails(element))
+  document.querySelector('.results').appendChild(cln);
 }
 
 showDetails = (element) => {
-  document.querySelector(".results").remove();
+  document.querySelector('.results').remove();
   const div = document.createElement('div');
-  div.setAttribute("class", "results");
+  div.setAttribute('class', 'results');
   document.getElementById('body').appendChild(div);
-  document.querySelector(".results").innerText = element.protein;
+  document.querySelector('.results').innerText = element.protein;
 
 }
-
-clearProduct = () => {
-  const list = document.querySelector(".product-containers");
-  const productContainers = document.querySelector(".results");
-  productContainers.remove();
-  let usersDiv = document.createElement("h1");
-  usersDiv.setAttribute("class", "results");
-  list.appendChild(usersDiv);
 
   showResultsInTheTable = (theCurrentFood) => {
     if (document.querySelector('.item'))
       document.querySelector('.nutritionalValuesTable').children[1].remove();
     let res = document.getElementById('result');
     res.innerHTML = '';
-    document.querySelector('.nutritionalValuesTable').style.display = "block";
+    document.querySelector('.nutritionalValuesTable').style.display = 'block';
     let table = document.querySelector('.nutritionalValuesTable');
     table += `
-    <tr class="item">
+    <tr class='item'>
         <td>${theCurrentFood.food_energy}</td>
         <td>${theCurrentFood.calcium}</td>
         <td>${theCurrentFood.carbohydrates}</td>
@@ -153,4 +145,3 @@ clearProduct = () => {
     const container = document.querySelector('.nutritionalValuesTable');
     container.innerHTML += table;
   }
-}
