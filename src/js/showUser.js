@@ -28,7 +28,7 @@ showUser = (user) => {
     cln.querySelector(".hight").innerText = user.hight;
     cln.querySelector(".startWeight").innerText = user.weight.startWeight;
     cln.querySelector(".weight").innerText = user.weight.meeting[user.weight.meeting.length - 1].Weight;
-    const bmi = user.weight.meeting[user.weight.meeting.length - 1].Weight / (Math.pow(user.hight, 2));
+    const bmi = user.weight.meeting[user.weight.meeting.length - 1].Weight / (user.hight**2);
     cln.querySelector(".bmi").innerText = bmi;
     document.querySelector(".users").appendChild(cln);
 }

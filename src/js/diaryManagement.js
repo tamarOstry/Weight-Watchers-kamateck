@@ -52,12 +52,6 @@ addDate = () => {
 
 for (let i=0; i<3; i++)
     drowMeal();
-// const inp1 = document.querySelector('.input-food-1-1');
-// const inp2 = document.querySelector('.input-food-1-2');
-// if(inp1 && inp2){
-//   inp1.addEventListener('onchange', () => setTimeout(()=>onkeydown,3000) , false);
-//   inp2.addEventListener('onchange', () => setTimeout(()=>onkeydown,3000), false);
-// }
 }
 
 onkeydown=()=>{
@@ -73,7 +67,6 @@ onkeydown=()=>{
   }
   res.innerHTML = '<ul>' + list + '</ul>';
 }
-
 let numMeal=1;
 drowMeal=()=>{
   let numToCreateInput=numMeal;

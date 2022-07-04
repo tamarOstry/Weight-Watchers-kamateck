@@ -12,7 +12,7 @@ getUserDetails = () => {
     document.querySelector('.email').innerHTML = user.email;
     document.querySelector('.heigh').innerHTML = user.hight;
     document.querySelector('.startWeight').innerHTML = user.weight.startWeight;
-    document.querySelector('.BMI').innerHTML = user.weight.meeting[user.weight.meeting.length - 1].Weight / (Math.pow(user.hight, 2));
+    document.querySelector('.BMI').innerHTML = user.weight.meeting[user.weight.meeting.length - 1].Weight / (user.hight** 2);
     user.weight.meeting.forEach(m => drowMeet(m));
 }
 
