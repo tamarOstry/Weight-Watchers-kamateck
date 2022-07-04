@@ -6,8 +6,8 @@ getParams = () => {
 
 getUserDetails = () => {
     const user = getParams();
-    document.querySelector('.name').innerHTML = user.firstName + " " + user.lastName;
-    document.querySelector('.address').innerHTML = user.address.city + " " + user.address.street + " " + user.address.number;
+    document.querySelector('.name').innerHTML = user.firstName + ' ' + user.lastName;
+    document.querySelector('.address').innerHTML = user.address.city + ' ' + user.address.street + ' ' + user.address.number;
     document.querySelector('.phone').innerHTML = user.phone;
     document.querySelector('.email').innerHTML = user.email;
     document.querySelector('.heigh').innerHTML = user.hight;
@@ -17,11 +17,11 @@ getUserDetails = () => {
 }
 
 drowMeet = (meet) => {
-    const element = document.getElementById("card-weight");
+    const element = document.getElementById('card-weight');
     const cln = element.content.cloneNode(true);
-    cln.querySelector(".data").innerText = meet.date;
-    cln.querySelector(".weight").innerText = meet.Weight;
-    document.querySelector(".weights").appendChild(cln);
-    document.querySelector(".goTodiaryManagement").addEventListener("click",
+    cln.querySelector('.data').innerText = meet.date;
+    cln.querySelector('.weight').innerText = meet.Weight;
+    document.querySelector('.weights').appendChild(cln);
+    document.querySelector('.goTodiaryManagement').addEventListener("click",
         () => window.location.href = `./diaryManagement.html?id=${getParams().id}`)
 }
