@@ -16,8 +16,8 @@ showUser = (user,n) => {
     cln.querySelector(".lastName").innerText = user.lastName;
     if(!n){
         cln.querySelector(".card").addEventListener("click", () => window.location.href=`showUser.html?id=${user.id}`);
-        const bmi = user.weight.meeting[user.weight.meeting.length - 1].Weight / (Math.pow(user.hight, 2));
-        const bmiColor = bmi - user.weight.meeting[user.weight.meeting.length - 2].Weight / (Math.pow(user.hight, 2));
+        const bmi = user.weight.meeting[user.weight.meeting.length - 1].Weight / (user.hight ** 2);
+        const bmiColor = bmi - user.weight.meeting[user.weight.meeting.length - 2].Weight / (user.hight ** 2);
         cln.querySelector(".bmi").innerText = bmi;
         cln.querySelector(".bmi").id=user.id;
         document.querySelector(".i").appendChild(cln);
