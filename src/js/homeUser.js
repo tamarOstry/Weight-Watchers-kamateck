@@ -3,9 +3,22 @@ getParams = () => {
     const user = JSON.parse(params.get('user'));
     return user;
 }
-
+let user;
 getUserDetails = () => {
-    const user = getParams();
+    const id = getParams();
+    fetch(`http://localhost:3016/user/${id}`)
+    .then(response => response.json())
+    .then(response => {
+      user=response;
+      drowTheUserDetails(user);
+    })
+    .catch(function (err) {
+      console.log('Something went wrong.', err);
+    });
+      
+}
+
+drowTheUserDetails=(user)=>{
     document.querySelector('.name').innerHTML = user.firstName + ' ' + user.lastName;
     document.querySelector('.address').innerHTML = user.address.city + ' ' + user.address.street + ' ' + user.address.number;
     document.querySelector('.phone').innerHTML = user.phone;
@@ -23,5 +36,5 @@ drowMeet = (meet) => {
     cln.querySelector('.weight').innerText = meet.Weight;
     document.querySelector('.weights').appendChild(cln);
     document.querySelector('.goTodiaryManagement').addEventListener("click",
-        () => window.location.href = `./diaryManagement.html?id=${getParams().id}`)
+        () => window.location.href = `./diaryManagement.html?id=${user.id}`)
 }

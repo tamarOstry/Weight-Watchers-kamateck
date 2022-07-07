@@ -1,7 +1,16 @@
 
 getUsers = (fromNewMeeting) => {
-    const users = JSON.parse(sessionStorage.getItem('manager')).users;
-    usersList1(users, fromNewMeeting);
+    fetch(`http://localhost:3016/user`)
+    .then(response => response.json())
+    .then(response => {
+       const users = response;
+       usersList1(users, fromNewMeeting);
+      })
+    .catch(function (err) {
+      console.log('Something went wrong.', err);
+    });
+    // const users = JSON.parse(sessionStorage.getItem('manager')).users;
+    
 }
 usersList1 = (list, fromNewMeeting) => {
     list.forEach((element) => {
