@@ -23,11 +23,9 @@ login = async() => {
       alert(data)
       if (data!==null){
         if(data.eatingDiary) {
-         sessionStorage.setItem('currentUser', JSON.stringify(data));
          window.location.href = `../src/html/homeUser.html?user=${JSON.stringify(data.id)}`;
         }
         else { 
-          sessionStorage.setItem('manager', JSON.stringify(manager));
           window.location.href = `../src/html/homeManager.html`;
             
           }
