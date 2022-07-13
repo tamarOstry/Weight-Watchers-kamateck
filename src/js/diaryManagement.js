@@ -21,19 +21,39 @@ getAllDiary = () => {
     .catch(err => console.error(err));
 }
 
+let numOfDay = 0;
 showDayEating = (oneDay) => {
   let numOfMeat = 1;
-  let numOfDay = 1;
   const element = document.querySelector('.dayEating-card');
-  const element2 = document.querySelector('.oneDay');
   const cln = element.content.cloneNode(true);
   cln.querySelector('.date').innerText = oneDay.date;
-  element2.id=numOfDay;
+
   oneDay.meals.forEach(meal => {
     cln.getElementById(numOfMeat).innerText = meal.Foods;
     numOfMeat++;
   });
+
   document.querySelector('.container').appendChild(cln);
+  let element2 = document.getElementsByClassName('edit')[numOfDay];
+  element2.id = numOfDay;
+  element2 = document.getElementsByClassName('save')[numOfDay];
+  element2.id = numOfDay;
+  element2 = document.getElementsByClassName('delete')[numOfDay];
+  element2.id = numOfDay;
+  document.querySelector('.edit').addEventListener("click", () => {
+    debugger
+    console.log(document.querySelector('.edit').id);
+    editDay(1)
+  });
+  document.querySelector('.save').addEventListener("click", () => {
+    saveDay(document.querySelector('.save').id)
+  });
+  document.querySelector('.delete').addEventListener("click", () => {
+    deleteDay(document.querySelector('.delete').id)
+  });
+  element2 = document.getElementsByClassName('one-day')[numOfDay];
+  element2.id = numOfDay;
+  numOfDay++;
 }
 let modal;
 addDate = () => {
@@ -53,27 +73,27 @@ addDate = () => {
     }
   }
 
-for (let i=0; i<3; i++)
+  for (let i = 0; i < 3; i++)
     drowMeal();
 
 }
 
-onkeydown=()=>{
+onkeydown = () => {
   const activeInput = document.activeElement;
-  const classInput =activeInput.attributes.class.value;
+  const classInput = activeInput.attributes.class.value;
   res = document.getElementsByClassName(classInput)[1];
   const valueInput = activeInput.value;
   res.innerHTML = '';
   let list = '';
   let foods = autocompleteMatch(valueInput);
-  for (i=0; i<foods.length; i++) {
-    list += `<li onclick="choosedFood('${foods[i]}','${classInput}')"> ${foods[i]} </li>`;       
+  for (i = 0; i < foods.length; i++) {
+    list += `<li onclick="choosedFood('${foods[i]}','${classInput}')"> ${foods[i]} </li>`;
   }
   res.innerHTML = '<ul>' + list + '</ul>';
 }
-let numMeal=1;
-drowMeal=()=>{
-  let numToCreateInput=numMeal;
+let numMeal = 1;
+drowMeal = () => {
+  let numToCreateInput = numMeal;
   const element = document.querySelector('.add-date-card');
   const cln = element.content.cloneNode(true);
   cln.querySelector('.meal-title').innerText = `meal-${numMeal}`;
@@ -83,14 +103,14 @@ drowMeal=()=>{
   document.querySelector('.modal-content').appendChild(cln);
 }
 
-createInput=(numToCreateInput)=>{
-  let numInput=6;
-  let input=document.createElement('input');
-    input.type='text';
-    input.id=numInput++;
-    input.placeholder='Enter food';
-    input.autocomplete='off';
-    document.getElementById(`container-foods-${numToCreateInput}`).appendChild(input); 
+createInput = (numToCreateInput) => {
+  let numInput = 6;
+  let input = document.createElement('input');
+  input.type = 'text';
+  input.id = numInput++;
+  input.placeholder = 'Enter food';
+  input.autocomplete = 'off';
+  document.getElementById(`container-foods-${numToCreateInput}`).appendChild(input);
 }
 
 saveNewDate = () => {
@@ -144,8 +164,8 @@ getOneMealInThisDay = (numOfMeal) => {
   const collection = document.getElementById(`container-foods-${numOfMeal}`);
   const childrens = collection.children;
   for (let i = 0; i < childrens.length; i++) {
-    if(childrens[i].children[0].value!=='')
-      foods.push(childrens[i].children[0].value); 
+    if (childrens[i].children[0].value !== '')
+      foods.push(childrens[i].children[0].value);
   }
   if (foods.length > 0) {
     let oneMeal = { 'Foods': foods };
@@ -160,45 +180,50 @@ checkIfThisDayIsAlreadyExist = (dateOfDay) => {
     return false;
   return true;
 }
-editDay = () => {
+
+editDay = (id) => {
   debugger
-  const collection = document.getElementsByTagName("td");
-  for (let i = 1; i < collection.length ; i++) {
-      collection[i].setAttribute('contenteditable', 'true')
+  const collection = document.getElementsByTagName('tr');
+  for (let index = 0; index < collection.length; index++) {
+    if (collection[index].id === id) {
+      collection[index].children.setAttribute('contenteditable', 'true')
+    }
   }
   alert("now you have to edit your meals😉")
 }
+
+
 saveDay = () => {
-  const collection = document.getElementsByTagName("td");
+  const collection = document.getElementsByTagName('td');
   let day = {
-    date:collection[0].innerHTML,
-    meals:{
-      Foods:[]
+    date: collection[0].innerHTML,
+    meals: {
+      Foods: []
     }
   }
-for (let i = 1; i < collection.length; i++) {
-  if(collection[i].innerHTML ==!null)
-   {
-     day.meals.Foods.push(collection.innerHTML.toString())
-   }
-   fetch(`http://localhost:3000/diary/${idOfUser}/${day.date}`, {
-    method: `POST`,
-    body: JSON.stringify(day),
-    headers: { 'Content-type': `application/json; charset=UTF-8` },
-  })
-    .then((response) => {
-      if (response.status === 200 && response.status !== undefined) {
-        alert(`the daily eating saved successfully`);
-      }
-      else {
-        console.log(response.message)
-        alert("Sorry😟,something failed...")
-      }
+  for (let i = 1; i < collection.length; i++) {
+    if (collection[i].innerHTML == !null) {
+      day.meals.Foods.push(collection.innerHTML.toString())
+    }
+    fetch(`http://localhost:3000/diary/${idOfUser}/${day.date}`, {
+      method: `POST`,
+      body: JSON.stringify(day),
+      headers: { 'Content-type': `application/json; charset=UTF-8` },
     })
-}};
+      .then((response) => {
+        if (response.status === 200 && response.status !== undefined) {
+          alert(`the daily eating saved successfully`);
+        }
+        else {
+          console.log(response.message)
+          alert("Sorry😟,something failed...")
+        }
+      })
+  }
+};
 
 deleteDay = () => {
-  
+
   fetch(`http://localhost:3000/diary/${idOfUser}/${day.date}`, {
     method: `DELETE`,
     body: JSON.stringify(),
@@ -213,7 +238,7 @@ deleteDay = () => {
         alert("Sorry😟,something failed...")
       }
     })
-};  
+};
 
 
 
