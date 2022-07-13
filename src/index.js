@@ -26,8 +26,7 @@ login = async() => {
          window.location.href = `../src/html/homeUser.html?user=${JSON.stringify(data.id)}`;
         }
         else { 
-          window.location.href = `../src/html/homeManager.html`;
-            
+          window.location.href = `../src/html/homeManager.html`;      
           }
           } 
           else{
