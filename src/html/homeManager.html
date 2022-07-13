@@ -23,7 +23,7 @@
     </select>
   </template>
 </head>
-<div id="searches" style="text-align: center;">
+<!-- <div id="searches" style="text-align: center;">
   Searches & Filters 🔎
   <div class="oneSearch">
     <span class="span">free Search:</span>
@@ -70,7 +70,7 @@
   </div>
   <button id="search" onclick="Searches()">search🔎</button>
   <button id="nullify" onclick="getUsers()">nullify🎯</button>
-</div>
+</div> -->
 <body onload="getUsers()">
   <h1>hello manager</h1>
   <table id="users" class="users">
@@ -87,6 +87,18 @@
     </tr>
   </table>
   <a href="./newMeeting.html">newMeeting</a>
+  <h3>search user</h3>
+    <div id="userList" class="userList"></div>
+    <label>enter for search</label><input type="text" id="inputSearch" name="inputSearch"><br />
+    <label>By Weight</label><input type="radio" name="byWeight" id="byWeight"><br />
+    <div id="weightInputs"></div>
+    <label>By Process</label><input type="radio" name="byProcess" id="byProcess"><br />
+    <label>By BMI</label><input type="radio" name="byBMI" id="byBMI"><br />
+    <div id="bmiInputs"></div>
+    <label>By City</label><input type="radio" name="byCity" id="byCity"><br />
+    <div id="cityInput"></div><br />
+    <button type="button" id="searchAll">search</button>
+    <button type="reset" id="reset">reset</button>
 </body>
 <link href="../css/homeManager.css " rel="stylesheet" />
 
