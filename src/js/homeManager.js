@@ -1,6 +1,6 @@
 
 getUsers = (fromNewMeeting) => {
-    fetch(`http://localhost:3016/user`)
+    fetch(`http://localhost:3000/user`)
     .then(response => response.json())
     .then(response => {
        const users = response;

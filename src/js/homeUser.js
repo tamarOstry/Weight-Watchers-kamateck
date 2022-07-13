@@ -6,7 +6,7 @@ getParams = () => {
 let user;
 getUserDetails = () => {
     const id = getParams();
-    fetch(`http://localhost:3016/user/${id}`)
+    fetch(`http://localhost:3000/user/${id}`)
     .then(response => response.json())
     .then(response => {
       user=response;

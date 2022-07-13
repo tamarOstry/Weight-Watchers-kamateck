@@ -9,7 +9,7 @@ getParams = () => {
 }
 
 getThisUser = (id) => {
-    fetch(`http://localhost:3016/user/${id}`)
+    fetch(`http://localhost:3000/user/${id}`)
     .then(response => response.json())
     .then(response => {
       user=response;
@@ -61,7 +61,7 @@ save = () => {
             startWeight : document.querySelector('.startWeight').innerHTML,
             bmi : document.querySelector('.bmi').innerHTML,
         }
-        fetch(`http://localhost:3016/user/${id}`, {
+        fetch(`http://localhost:3000/user/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user)
