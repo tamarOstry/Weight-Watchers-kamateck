@@ -7,7 +7,7 @@ getParams = () => {
 
 getAllDiary = () => {
   getParams();
-  fetch(`http://localhost:3000/users/${idOfUser}`)
+  fetch(`http://localhost:3016/diary/${idOfUser}`)
     .then((response) => {
       if (response.status === 200 && response.status !== undefined)
         return response.json();
@@ -52,12 +52,7 @@ addDate = () => {
 
 for (let i=0; i<3; i++)
     drowMeal();
-// const inp1 = document.querySelector('.input-food-1-1');
-// const inp2 = document.querySelector('.input-food-1-2');
-// if(inp1 && inp2){
-//   inp1.addEventListener('onchange', () => setTimeout(()=>onkeydown,3000) , false);
-//   inp2.addEventListener('onchange', () => setTimeout(()=>onkeydown,3000), false);
-// }
+
 }
 
 onkeydown=()=>{
@@ -100,10 +95,10 @@ saveNewDate = () => {
   const eatingDiary = getAllTheMealsInThisDay();
   if (eatingDiary) {
     currentUser.eatingDiary.push(eatingDiary);
-    fetch(`http://localhost:3000/users/${idOfUser}`, {
-      method: `PATCH`,
+    fetch(`http://localhost:3000/diary/${idOfUser}`, {
+      method: `POST`,
       body: JSON.stringify({
-        "eatingDiary": currentUser.eatingDiary,
+        "eatingDiary":currentUser.eatingDiary,
       }),
       headers: { 'Content-type': `application/json; charset=UTF-8` },
     })
@@ -165,7 +160,59 @@ checkIfThisDayIsAlreadyExist = (dateOfDay) => {
   return true;
 }
 
-editDay=()=>{
-
+editDay = () => {
+  debugger
+  const collection = document.getElementsByTagName("td");
+  for (let i = 1; i < collection.length ; i++) {
+      collection[i].setAttribute('contenteditable', 'true')
+  }
+  alert("now you have to edit your meals😉")
 }
+saveDay = () => {
+  const collection = document.getElementsByTagName("td");
+  let day = {
+    date:collection[0].innerHTML,
+    meals:{
+      Foods:[]
+    }
+  }
+for (let i = 1; i < collection.length; i++) {
+  if(collection[i].innerHTML ==!null)
+   {
+     day.meals.Foods.push(collection.innerHTML.toString())
+   }
+   fetch(`http://localhost:3000/diary/${idOfUser}/${day.date}`, {
+    method: `POST`,
+    body: JSON.stringify(day),
+    headers: { 'Content-type': `application/json; charset=UTF-8` },
+  })
+    .then((response) => {
+      if (response.status === 200 && response.status !== undefined) {
+        alert(`the daily eating saved successfully`);
+      }
+      else {
+        console.log(response.message)
+        alert("Sorry😟,something failed...")
+      }
+    })
+}};
+
+deleteDay = () => {
+  
+  fetch(`http://localhost:3000/diary/${idOfUser}/${day.date}`, {
+    method: `DELETE`,
+    body: JSON.stringify(),
+    headers: { 'Content-type': `application/json; charset=UTF-8` },
+  })
+    .then((response) => {
+      if (response.status === 200 && response.status !== undefined) {
+        alert(`the daily eating saved successfully`);
+      }
+      else {
+        console.log(response.message)
+        alert("Sorry😟,something failed...")
+      }
+    })
+};  
+
 
