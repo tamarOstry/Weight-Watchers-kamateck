@@ -27,7 +27,6 @@ showDayEating = (oneDay) => {
   const element = document.querySelector('.dayEating-card');
   const cln = element.content.cloneNode(true);
   cln.querySelector('.date').innerText = oneDay.date;
-
   oneDay.meals.forEach(meal => {
     cln.getElementById(numOfMeat).innerText = meal.Foods;
     numOfMeat++;
