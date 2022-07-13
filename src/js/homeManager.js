@@ -26,7 +26,11 @@ showUser = (user, fromNewMeeting) => {
     if(!fromNewMeeting){
         cln.querySelector('.card').addEventListener("click", () => window.location.href=`showUser.html?id=${user.id}`);
         const bmi = user.weight.meeting[user.weight.meeting.length - 1].Weight / (user.hight ** 2);
-        const bmiColor = bmi - user.weight.meeting[user.weight.meeting.length - 2].Weight / (user.hight ** 2);
+        let bmiColor;
+        if(user.weight.meeting.length>1)
+          bmiColor = bmi - user.weight.meeting[user.weight.meeting.length - 2].Weight / (user.hight ** 2);
+        else
+          bmiColor = bmi;
         cln.querySelector('.bmi').innerText = bmi;
         cln.querySelector('.bmi').id = user.id;
         document.querySelector('.i').appendChild(cln);
