@@ -7,7 +7,7 @@ getParams = () => {
 
 getAllDiary = () => {
   getParams();
-  fetch(`http://localhost:3016/diary/${idOfUser}`)
+  fetch(`http://localhost:3000/diary/${idOfUser}`)
     .then((response) => {
       if (response.status === 200 && response.status !== undefined)
         return response.json();
@@ -16,7 +16,7 @@ getAllDiary = () => {
     })
     .then((response) => {
       currentUser = response;
-      response.eatingDiary.forEach(d => showDayEating(d));
+      response.forEach(d => showDayEating(d));
     })
     .catch(err => console.error(err));
 }
