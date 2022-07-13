@@ -25,15 +25,15 @@ showDayEating = (oneDay) => {
   let numOfMeat = 1;
   let numOfDay = 1;
   const element = document.querySelector('.dayEating-card');
-  const element2 = document.querySelector('.oneDay');
   const cln = element.content.cloneNode(true);
   cln.querySelector('.date').innerText = oneDay.date;
-  element2.id=numOfDay;
   oneDay.meals.forEach(meal => {
     cln.getElementById(numOfMeat).innerText = meal.Foods;
     numOfMeat++;
   });
   document.querySelector('.container').appendChild(cln);
+  let element2 = document.querySelector('.one-day');
+  element2.id=numOfDay;
 }
 let modal;
 addDate = () => {

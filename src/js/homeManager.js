@@ -1,9 +1,9 @@
-
+let users;
 getUsers = (fromNewMeeting) => {
     fetch(`http://localhost:3000/user`)
     .then(response => response.json())
     .then(response => {
-       const users = response;
+       users = response;
        usersList1(users, fromNewMeeting);
       })
     .catch(function (err) {
@@ -53,7 +53,36 @@ changeColor = (bmiColor, id) => {
     };
 }
 
-Searches = () => {
+
+
+saveNewMeeting = () => {
+    let meeting=[];
+    users.forEach(user => {
+      const element = document.getElementById(user.id);
+      if (!element.children[5].children[0].checked)
+        meeting.push({"userId": user.id, "Weight": element.children[2].children[0].value, "date": element.children[3].children[0].value})
+    });
+    fetch(`http://localhost:3000/meeting`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(meeting)
+    })
+    .then((response) => {
+        if (response.status === 200 && response.status !== undefined) 
+            return response.json();
+        else 
+            alert(response.message)
+     })
+    .then(data => {
+        if(data){
+            alert('saved successfully');
+            window.location.href = "./homeManager.html";
+        }
+    })
+    .catch(err => alert('error: ' + err.message))
+  }
+
+  Searches = () => {
     let users = JSON.parse(sessionStorage.getItem('manager')).users;
     let inputToSearch_1, inputToSearch_2;
     inputToSearch_1 = document.getElementById('searchFree').value;
@@ -132,4 +161,155 @@ drawAfterChanges = (u) => {
     usersDiv.setAttribute('class', 'i');
     list.appendChild(usersDiv);
     usersList1(u);
+}
+
+
+
+  //search & filter
+const byWeight = document.querySelector('#byWeight');
+const byProcess = document.querySelector('#byProcess');
+const byBMI = document.querySelector('#byBMI');
+const byCity = document.querySelector('#byCity');
+const inputToSearch = document.querySelector('#inputSearch');
+const search = document.querySelector('#search');
+
+const weightInputs = document.querySelector('#weightInputs');
+let inputMinWeight = null;
+let inputMaxWeight = null;
+let weightDiv = null;
+let labelBigger = null;
+let labelLower = null;
+const boolSearch = [false, false, false, false];
+
+byWeight.onchange = (e) => {
+    e.preventDefault();
+    boolSearch[0] = true;
+    inputMinWeight = document.createElement('input');
+    inputMaxWeight = document.createElement('input');
+    labelBigger = document.createElement('label');
+    labelLower = document.createElement('label');
+    inputMinWeight.type = "text";
+    inputMaxWeight.type = "text";
+    labelBigger.innerHTML = "bigger than:";
+    labelLower.innerHTML = "lower than:";
+    weightDiv = document.createElement('div');
+    weightDiv.append(labelBigger, inputMinWeight, labelLower, inputMaxWeight);
+    weightInputs.append(weightDiv);
+}
+
+// byProcess.onchange = (e) => {
+//     e.preventDefault();
+//     boolSearch[1] = true;
+// }
+const bmiInputs = document.querySelector('#bmiInputs');
+let minBmi = null;
+let maxBmi = null;
+let BMIDiv = null;
+let labelBigger2 = null;
+let labelLower2 = null;
+byBMI.onchange = (e) => {
+    e.preventDefault();
+    boolSearch[2] = true;
+    minBmi = document.createElement('input');
+    maxBmi = document.createElement('input');
+    labelBigger2 = document.createElement('label');
+    labelLower2 = document.createElement('label');
+    minBmi.type = "text";
+    maxBmi.type = "text";
+    labelBigger2.innerHTML = "bigger than:";
+    labelLower2.innerHTML = "lower than:";
+    BMIDiv = document.createElement('div');
+    BMIDiv.append(labelBigger2, minBmi, labelLower2, maxBmi);
+    bmiInputs.append(BMIDiv);
+}
+
+const cityInput = document.querySelector('#cityInput');
+let city = null;
+byCity.onchange = (e) => {
+    e.preventDefault();
+    boolSearch[3] = true;
+    city = document.createElement('input');
+    city.type = "text";
+    cityInput.append(city);
+}
+
+let list = setUsersList();
+let currentUsers = list;
+
+//
+let searches = ['', '', '', '', '', ''];
+// let ezerSearch = [false, false, false, false, false, false];
+//
+let flag = true;
+search.onclick = (e) => {
+    e.preventDefault();
+    for (let i = 0; i < boolSearch.length; i++) {
+        if (boolSearch[i]) {
+            switch (i) {
+                case 0:
+                    // currentUsers = byWeightFunc(currentUsers, parseInt(inputMinWeight.value), parseInt(inputMaxWeight.value));
+                    searches[1] = inputMinWeight.value;
+                    searches[2] = inputMaxWeight.value;
+                    break;
+                case 1:
+                    // currentUsers = byProcessFunc(currentUsers);
+                    break;
+                case 2:
+                    // currentUsers = byBMIFunc(currentUsers, parseInt(minBmi.value), parseInt(maxBmi.value));
+                    searches[3] = minBmi.value;
+                    searches[4] = maxBmi.value;
+                    break;
+                case 3:
+                    // currentUsers = byCityFunc(currentUsers, city.value);
+                    searches[5] = city.value;
+                    break;
+            }
+        }
+    }
+    //sendToPrint(currentUsers);
+    if (inputToSearch.value != "") {
+        // currentUsers = searchFunc(list, inputToSearch.value);
+        searches[0] = inputToSearch.value;
+        //  sendToPrint(currentUsers);
+    }
+    console.log(searches);
+    console.log(boolSearch);
+    getFromServer(searches);
+    // funcReset();
+}
+
+const getFromServer = (searches) => {
+    let a = 'aa'
+    fetch(`http://localhost:8000/users/${a}}`, {
+        method: `POST`,
+        body: JSON.stringify(
+            searches
+        ),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    }).then(response => {
+        return response.json();
+    }).then(data => {
+        console.log(data);
+        sendToPrint(data);
+    })
+}
+
+//reset
+const reset = document.querySelector('#reset');
+const funcReset = () => {
+    console.log('funcReset');
+    byWeight.checked = false;
+    byProcess.checked = false;
+    byBMI.checked = false;
+    byCity.checked = false;
+    weightInputs.innerHTML = "";
+    bmiInputs.innerHTML = "";
+    cityInput.innerHTML = "";
+}
+reset.onclick = (e) => {
+    e.preventDefault();
+    funcReset();
+    sendToPrint(list);
 }
