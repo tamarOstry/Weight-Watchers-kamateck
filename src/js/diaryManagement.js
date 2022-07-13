@@ -16,7 +16,7 @@ getAllDiary = () => {
     })
     .then((response) => {
       currentUser = response;
-      response.eatingDiary.forEach(d => showDayEating(d));
+      response.forEach(d => showDayEating(d));
     })
     .catch(err => console.error(err));
 }
